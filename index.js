@@ -15,3 +15,21 @@ setInterval(function () {
     .tz("Europe/Vienna")
     .format(`h:mm:ss A`);
 }, 1000);
+
+function updateCity(event) {
+  let cityTimeZone = event.target.value;
+  let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+  let cityTime = moment().tz(cityTimeZone);
+  let TimeContainerElement = document.querySelector("#Time-Container");
+  TimeContainerElement.innerHTML = `
+  <div class="city1">
+          <h2>${cityName}</h2>
+          <div>
+            <div class="date1">${cityTime.format(`dddd, MMMM Do YYYY`)}</div>
+            <div class="time1">${cityTime.format(`h:mm:ss A`)}</div>
+          </div>
+        </div>`;
+}
+
+let inputElement = document.querySelector("#input");
+inputElement.addEventListener("change", updateCity);
